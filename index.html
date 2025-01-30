@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIMIS Queries</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Simple styling for the login form */
+        .login-container {
+            margin-top: 20px;
+        }
+        .login-container input {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+        .login-container button {
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>KIMIS Queries Submission</h1>
+        <form id="queryForm">
+            <label for="institutionName">Institution Name:</label>
+            <input type="text" id="institutionName" required>
+
+            <label for="branchCode">Branch Code:</label>
+            <input type="text" id="branchCode" required>
+
+            <label for="complaint">Complaint/Issue:</label>
+            <textarea id="complaint" required></textarea>
+
+            <label for="feedback">Feedback/Summary:</label>
+            <textarea id="feedback"></textarea>
+
+            <button type="submit">Submit Query</button>
+        </form>
+
+        <!-- Login Form -->
+        <div class="login-container">
+            <h2>Login to View Submitted Queries Report</h2>
+            <input type="text" id="loginId" placeholder="Login ID" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button id="loginBtn">Login</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle login
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const loginId = document.getElementById('loginId').value;
+            const password = document.getElementById('password').value;
+
+            // Hardcoded credentials (for demonstration purposes)
+            const validLoginId = "admin";
+            const validPassword = "password123";
+
+            if (loginId === validLoginId && password === validPassword) {
+                // Redirect to the report page if credentials are correct
+                window.location.href = 'report.html';
+            } else {
+                alert("Invalid Login ID or Password. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>

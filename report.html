@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Queries Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add some basic styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submitted Queries Report</h1>
+        <table id="queryTable">
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Institution Name</th>
+                    <th>Branch Code</th>
+                    <th>Complaint/Issue</th>
+                    <th>Date & Time</th>
+                    <th>Feedback/Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Submitted queries will be populated here -->
+            </tbody>
+        </table>
+        <button id="exportBtn">Export to Excel</button>
+        <button onclick="window.location.href='index.html'">Back to Submission</button>
+    </div>
+
+    <script src="report.js"></script>
+</body>
+</html>
