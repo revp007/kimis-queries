@@ -26,4 +26,43 @@ function displayQueries() {
 
 function deleteQuery(index) {
     // Retrieve the existing queries from local storage
-   
+    let queries = JSON.parse(localStorage.getItem('queries')) || [];
+    
+    // Remove the query at the specified index
+    queries.splice(index, 1);
+    
+    // Save the updated queries back to local storage
+    localStorage.setItem('queries', JSON.stringify(queries));
+    
+    // Refresh the displayed queries
+    displayQueries();
+}
+
+document.getElementById('exportBtn').addEventListener('click', function() {
+    const queries = JSON.parse(localStorage.getItem('queries')) || [];
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Token,Institution Name,Branch Code,Complaint/Issue,Date & Time,Feedback/Summary\n"; // Header
+
+    queries.forEach(query => {
+        const row = [
+            query.token,
+            query.institutionName,
+            query.branchCode,
+            query.complaint,
+            query.dateTime,
+            query.feedback
+        ].join(",");
+        csvContent += row + "\n"; // Add each row
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "queries.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "queries.csv".
+});
+
+// Initial call to display any existing queries
+displayQueries();
