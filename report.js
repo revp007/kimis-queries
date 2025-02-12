@@ -40,28 +40,28 @@ function deleteQuery(index) {
 
 document.getElementById('exportBtn').addEventListener('click', function() {
     const queries = JSON.parse(localStorage.getItem('queries')) || [];
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Token,Institution Name,Branch Code,Complaint/Issue,Date & Time,Feedback/Summary\n"; // Header
+    let xlsContent = '<table><tr><th>Token</th><th>Institution Name</th><th>Branch Code</th><th>Complaint/Issue</th><th>Date & Time</th><th>Feedback/Summary</th></tr>';
 
     queries.forEach(query => {
-        const row = [
-            query.token,
-            query.institutionName,
-            query.branchCode,
-            query.complaint,
-            query.dateTime,
-            query.feedback
-        ].join(",");
-        csvContent += row + "\n"; // Add each row
+        xlsContent += `<tr>
+            <td>${query.token}</td>
+            <td>${query.institutionName}</td>
+            <td>${query.branchCode}</td>
+            <td>${query.complaint}</td>
+            <td>${query.dateTime}</td>
+            <td>${query.feedback}</td>
+        </tr>`;
     });
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "queries.csv");
-    document.body.appendChild(link); // Required for FF
+    xlsContent += '</table>';
 
-    link.click(); // This will download the data file named "queries.csv".
+    const blob = new Blob([xlsContent], { type: 'application/vnd.ms-excel' });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "kimis_queries_report.xls";
+    document.body.appendChild(link); // Required for FF
+    link.click(); // This will download the data file named "kimis_queries_report.xls".
+    document.body.removeChild(link); // Clean up
 });
 
 // Initial call to display any existing queries
